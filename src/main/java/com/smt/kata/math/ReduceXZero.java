@@ -1,5 +1,7 @@
 package com.smt.kata.math;
 
+import java.util.Arrays;
+
 /****************************************************************************
  * <b>Title</b>: ReduceXZero.java
  * <b>Project</b>: SMT-Kata
@@ -48,6 +50,13 @@ public class ReduceXZero {
 	 * @return Minimum number of moves to match the sum
 	 */
 	public int minOperations(int[] nums, int x) {
+		int count = 0;
+		
+		
+		
+		List<int> list = new arrayList[];
+		
+		
 		return x;
 	}
 }

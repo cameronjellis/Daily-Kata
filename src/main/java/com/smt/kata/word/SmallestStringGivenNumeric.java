@@ -50,8 +50,39 @@ public class SmallestStringGivenNumeric {
 	 * @param k Value of the individual chars
 	 * @return Smallest String.  "" if invalid data
 	 */
-	public String getSmallestString(int n, int k) {
-		return "";
-	}
-
+	 
+	
+    public String getSmallestString(int n, int k) {
+        // validate input
+        if (n == 0 || n < 1 || n > 105 || k == 0 || k < n || k > 26*n) return "";
+        
+        // create result string of a's
+        String result = "a".repeat(n);
+        
+        // starting at end of string, replace each a with "largest" possible char while sum < k
+        for (int i = n-1; i >= 0; i--) {
+            int diff = (k - sumString(result));
+            if (diff == 0) break;
+            
+            char replaceVal = (diff >= 26) ? 'z' : (char) (diff + 97);
+            result = replaceCharInString(result, i, replaceVal);
+        }
+        return result;
+    }
+    
+    
+    
+    // gets sum of string according to rules specified
+    public int sumString(String string) {
+        int i = 0;
+        for (char c: string.toCharArray()) {
+            i += (int) (c - 96);
+        }
+        return i;
+    }
+    
+    // replaces char at index in string with value
+    public String replaceCharInString(String s, int index, char value) {
+        return (s.substring(0, index) + value + s.substring(index + 1));
+    }
 }

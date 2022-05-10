@@ -27,7 +27,19 @@ public class MinimumChangeReceived {
 	 * @return
 	 */
 	public int calculate(double dAmt) {
-		return 0;
+		int count = 0;
+		
+		int amt = (int)(dAmt * 100);
+		
+		if (amt < 1) return 0;
+		
+		int[] coins = {25, 10, 05, 01};
+			
+		for (int coin : coins) {
+			count += amt/coin;
+			amt = amt%coin;
+		}
+		return count;
 	}
 
 }

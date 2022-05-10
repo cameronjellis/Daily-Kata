@@ -2,6 +2,7 @@ package com.smt.kata.time;
 
 // JDK 11.x
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /****************************************************************************
@@ -64,7 +65,19 @@ public class KeyCardAlert {
 	 * @param keyTime Log of times
 	 * @return List of names that met the criteria from above
 	 */
-    public List<String> find(String[] keyName, String[] keyTime) {
+	
+	
+	
+    public static List<String> find(String[] keyName, String[] keyTime) {
+    	
+    	HashMap<String, String> keyCardMap = new HashMap<String, String>();
+    	
+    	for (int i = 0; i < keyName.length; i ++) {
+    		keyCardMap.put(keyName[i], keyTime[i]);
+    	}
+    	
+    	
+    	
     	return new ArrayList<>();
     }
 

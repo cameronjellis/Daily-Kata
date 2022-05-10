@@ -33,10 +33,37 @@ public class ZigZagNumbers {
 
 	/**
 	 * Determines if the numbers in the source provided ho up and down (zig and zag)
+	 * 
 	 * @param source Array of numbers to evaluate
-	 * @return True if a zig zgag array.  False otherwise
+	 * @return True if a zig zgag array. False otherwise
 	 */
 	public boolean isZigZag(int[] source) {
+		
+		if (source == null || source.length < 2) {
+			return false;
+		}
+		// if [i] > i+1
+		// else if i < i+1
+		boolean greater = (source[0] > source[1]);
+		for (int i = 0; i < source.length - 1; i++) {
+			if (source[i] < source[i + 1]) {
+				if (greater) {
+					return false;
+				} else {
+					greater = true;
+				}
+			}
+			else if (source[i] > source[i + 1]) {
+				if (!greater) {
+					return false;
+				} else {
+					greater = false;
+				}
+
+			} else return false;
+
+		}
+
 		return true;
 	}
 }
