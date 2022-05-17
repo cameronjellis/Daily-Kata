@@ -44,19 +44,20 @@ import java.util.Arrays;
 public class ReduceXZero {
 
 	/**
+	 * @param object
+	 * @param i
+	 * @return
+	 */
+	public Integer minOperations(Object object, int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
 	 * Find the minimum operations to match sum to X
 	 * @param nums Array to match against
 	 * @param x Value to use to match sum of array
 	 * @return Minimum number of moves to match the sum
 	 */
-	public int minOperations(int[] nums, int x) {
-		int count = 0;
-		
-		
-		
-		List<int> list = new arrayList[];
-		
-		
-		return x;
-	}
+
 }
