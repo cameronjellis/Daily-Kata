@@ -39,11 +39,24 @@ public class ToeplitzMatrix {
 
 	/**
 	 * Checks all of the diagonals to make sure the values are the same
+	 * 
 	 * @param matrix Matrix to validate
-	 * @return True if its a toeplitz.  False otherwise
+	 * @return True if its a toeplitz. False otherwise
 	 */
 	public boolean isToeplitz(int[][] matrix) {
-		
-		return matrix == null;
+		if (matrix == null || matrix.length == 0)
+			return false;
+
+		for (int i = 1; i < matrix.length-1; i++) {
+			if (matrix[i] == null) {
+				return false;
+			}
+			for (int j = 1; j < matrix[i].length-1; j++) {
+				if (matrix[i][j] != matrix[i - 1][j - 1]) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }

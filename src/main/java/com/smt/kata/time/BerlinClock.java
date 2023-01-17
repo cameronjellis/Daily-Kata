@@ -1,5 +1,8 @@
 package com.smt.kata.time;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The Berlin Clock (Mengenlehreclock or Berlin Uhr) is a clock that tells the
  * time using a series of illuminated coloured blocks, as you can see in the
@@ -55,7 +58,13 @@ public class BerlinClock {
 	 * @return
 	 */
 	public String generateTime(String time) {
-		return null;
+		if (!validateTime(time)) return null;
+		StringBuilder timeString = new StringBuilder();
+		timeString.append(generateSeconds(time) + generateFiveHoursRow(time) + 
+		generateSingleHoursRow(time) + generateFiveMinutesRow(time) + 
+		generateSingleMinutesRow(time));
+		
+		return timeString.toString();
 	}
 
 	/**
@@ -66,7 +75,19 @@ public class BerlinClock {
 	 * @return
 	 */
 	public String generateSingleMinutesRow(String time) {
-		return null;
+		if (!validateTime(time)) return null;
+		int minutes = splitTime(time).get(1)%5;
+		StringBuilder minuteLights = new StringBuilder();
+		for (int i = 0; i < 4; i++) {
+			if (i < minutes) {
+				minuteLights.append("Y");
+			} else {
+				minuteLights.append("0");
+			}
+		
+		}
+		
+		return minuteLights.toString();
 	}
 
 	/**
@@ -77,7 +98,23 @@ public class BerlinClock {
 	 * @return
 	 */
 	public String generateFiveMinutesRow(String time) {
-		return null;
+		if (!validateTime(time)) return null;
+		int minutes = splitTime(time).get(1)/5;
+		StringBuilder minuteLights = new StringBuilder();
+		for (int i = 1; i < 12; i++) {
+			if (i <= minutes) {
+				if (i % 3 == 0) {
+					minuteLights.append("R");
+				} else {
+					minuteLights.append("Y");
+				}
+				
+			} else {
+				minuteLights.append("0");
+			}
+		}	
+		
+		return minuteLights.toString();
 	}
 
 	/**
@@ -88,7 +125,17 @@ public class BerlinClock {
 	 * @return
 	 */
 	public String generateSingleHoursRow(String time) {
-		return null;
+		if (!validateTime(time)) return null;
+		int hours = splitTime(time).get(0)%5;
+		StringBuilder hourLights = new StringBuilder();
+		for (int i = 0; i < 4; i++) {
+			if (i < hours) {
+				hourLights.append("R");
+			} else {
+				hourLights.append("0");
+			}
+		}	
+		return hourLights.toString();
 	}
 
 	/**
@@ -99,7 +146,17 @@ public class BerlinClock {
 	 * @return
 	 */
 	public String generateFiveHoursRow(String time) {
-		return null;
+		if (!validateTime(time)) return null;
+		int hours = splitTime(time).get(0)/5;
+		StringBuilder hourLights = new StringBuilder();
+		for (int i = 0; i < 4; i++) {
+			if (i < hours) {
+				hourLights.append("R");
+			} else {
+				hourLights.append("0");
+			}
+		}	
+		return hourLights.toString();
 	}
 
 	/**
@@ -110,6 +167,41 @@ public class BerlinClock {
 	 * @return
 	 */
 	public String generateSeconds(String time) {
-		return null;
+		
+		if (!validateTime(time)) return null;
+		
+		int seconds = splitTime(time).get(2)%2;
+		
+		StringBuilder secondLight = new StringBuilder();
+		if (seconds == 0) {
+			secondLight.append("Y");
+		} else {
+			secondLight.append("0");
+		}
+		return secondLight.toString();
+	}
+	
+	public List<Integer> splitTime(String time) {
+		List<Integer> timeList = new ArrayList<>();
+		String[] times = time.split(":");
+			for (String t : times) {
+				timeList.add(Integer.parseInt(t));
+			}
+
+		return timeList;
+	}
+	
+	public boolean validateTime(String time) {
+		String[] timeArray = time.split(":");
+		if (timeArray.length != 3) return false;
+		for (String t : timeArray) {
+			try {
+				Integer.parseInt(t);
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 }

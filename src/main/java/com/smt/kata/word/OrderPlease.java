@@ -1,5 +1,8 @@
 package com.smt.kata.word;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /****************************************************************************
  * <b>Title</b>: OrderPlease.java
  * <b>Project</b>: SMT-Kata
@@ -36,6 +39,59 @@ public class OrderPlease {
 
 	
 	public String reorder(String phrase) {
-        return phrase;
+		if (phrase == null || phrase.length() == 0) {
+			return "";
+		}
+		
+		StringBuilder returnPhrase = new StringBuilder();
+		
+		String[] strArr = phrase.split(" ");
+		int[] stringVals = new int[strArr.length];
+		
+		for (int i = 0; i < strArr.length; i++) {
+			stringVals[i] = getVal(strArr[i]);
+		}
+		
+		Arrays.sort(strArr, Comparator.naturalOrder());
+		
+		for (String s: strArr) {
+			
+			
+			if (getVal(s) == 0) {
+				returnPhrase.append(s);
+			}
+		}
+		
+		return returnPhrase.toString();
     }
+	
+	public int getVal(String string) {
+		for (String s: string.split("")) {
+			if (s.matches("[0-9]")) {
+				return Integer.parseInt(s);
+			}
+		}		
+		return 0;
+		
+	}
 }
+
+
+
+
+//String[] strArr = phrase.replaceAll("[a-zA-z]", "").split(" ");
+//if (strArr.length == 0) {
+//	return phrase;
+//}
+//
+//
+//String[] stringArray = phrase.split(" ");
+//
+//
+//System.out.println(Arrays.asList(strArr));
+//for (String s: strArr) {
+//	
+//	
+//}
+//
+//return returnPhrase.toString();

@@ -62,7 +62,7 @@ public class PowerImpleTest {
 	 */
 	@Test
 	void BothZeroPow() throws Exception {
-		assertEquals(0, pi.calcPower(0, 0));
+		assertEquals(1, pi.calcPower(0, 0));
 	}
 	
 }

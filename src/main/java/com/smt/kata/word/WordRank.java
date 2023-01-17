@@ -26,11 +26,35 @@ public class WordRank {
 
 	/**
 	 * Ranks the words and returns the proper entry
+	 * 
 	 * @param phrase
 	 * @return
 	 */
 	public String calculate(String phrase) {
+
+		if (phrase == null) return "";
 		
-		return phrase;
+		String[] words = phrase.split(" ");
+		System.out.println(words + "--words");
+		String result = "";
+
+		int currentVal = 0;
+
+		for (String s : words) {
+			int val = 0;
+			char[] chars = s.toLowerCase().toCharArray();
+			System.out.println(chars + "--chars");
+			for (char c : chars) {
+				val += c;
+			}
+			if (val > currentVal) {
+				currentVal = val;
+				System.out.println(currentVal + "--currentVal");
+				result = s;
+			
+			}
+
+		}
+		return result;
 	}
 }

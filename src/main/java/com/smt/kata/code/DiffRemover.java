@@ -1,5 +1,10 @@
 package com.smt.kata.code;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Given a master int array and removes diff array.  Remove all instances of
  * elements in remove from master.
@@ -22,6 +27,25 @@ package com.smt.kata.code;
 public class DiffRemover {
 
 	public int[] deDiff(int[] master, int[] remove) {
-		return null;
+		
+		if (master == null || master.length == 0) return new int[0];
+		if (remove == null || remove.length == 0) return master;
+		
+		
+		List<Integer> list = new ArrayList<>();
+		List<Integer> remList = Arrays.stream(remove).boxed().collect(Collectors.toList());
+		
+		for (Integer i : master) {
+			if (!remList.contains(i)) {
+				list.add(i);
+			}
+		}
+		
+		list.sort(null);
+		System.out.println(list);
+		
+		int[] resultList = list.stream().mapToInt(i -> i).toArray();
+				
+		return resultList;
 	}
 }

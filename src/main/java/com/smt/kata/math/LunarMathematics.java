@@ -42,8 +42,39 @@ public class LunarMathematics {
 	 * @param secondNumber Second Number to add
 	 * @return Total of the lunar math addition of the provided 2 numbers
 	 */
-	public int add(int firstNumber, int secondNumber) {
-		return firstNumber + secondNumber;
+	public int add(int firstNumber, int secondNumber) {		
+		StringBuilder first = new StringBuilder();
+		first.append(Math.abs(firstNumber));
+		first.reverse();
+		StringBuilder second = new StringBuilder();
+		second.append(Math.abs(secondNumber));
+		second.reverse();
+		
+		StringBuilder newNum = new StringBuilder();
+		
+		if (first.length() > second.length()) {
+			for (int i=second.length(); i<first.length(); i++) {
+				second.append("0");
+			}
+		}
+		if (second.length() > first.length()) {
+			for (int i=first.length(); i<second.length(); i++) {
+				first.append("0");
+			}
+		}
+		
+		for (int i = 0; i < first.length(); i++) {
+			if (first.charAt(i) >= second.charAt(i)) {
+				newNum.append(first.charAt(i));
+			} else if (second.charAt(i) >= first.charAt(i)) {
+				newNum.append(second.charAt(i));
+			}
+		}
+		System.out.println(first + " 1st " + second + " 2nd " + newNum + " <->new");
+		newNum.reverse();
+//		for (int i = )
+		
+		return Integer.parseInt(newNum.toString());
 	}
 
 }

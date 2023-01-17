@@ -2,8 +2,11 @@ package com.smt.kata.word;
 
 // JDK 11.x
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /****************************************************************************
  * <b>Title</b>: AnagramGroup.java
@@ -43,11 +46,41 @@ public class AnagramGroup {
 
 	/**
 	 * Group the anagrams together
-	 * @param words Array of words to group 
+	 * 
+	 * @param words Array of words to group
 	 * @return Groups of anagrams
 	 */
 	public Collection<List<String>> assign(String[] words) {
-		return new ArrayList<>();
+		if (words == null || words.length < 1) return new ArrayList<>();
+		Set<List<String>> returnList = new HashSet<>();
+
+		for (int i = 0; i < words.length; i++) {
+			
+			List<String> list = new ArrayList<>();
+			if (words[i] == null || words[i].isEmpty()) continue;
+			
+			for (int j = 0; j < words.length; j++) {
+				
+				if (words[j] == null || words[j].isEmpty()) continue;
+				
+				char[] s = words[i].toCharArray();
+				char[] w = words[j].toCharArray();
+
+				Arrays.sort(s);
+				Arrays.sort(w);
+				
+				if (Arrays.equals(s, w)) {
+					list.add(words[j]);
+				}
+				
+			}
+			
+			returnList.add(list);
+		}
+
+		System.out.println(returnList);
+
+		return returnList;
 	}
 
 }

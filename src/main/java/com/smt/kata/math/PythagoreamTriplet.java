@@ -1,5 +1,8 @@
 package com.smt.kata.math;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /****************************************************************************
  * <b>Title</b>: PythagoreamTriplet.java
  * <b>Project</b>: SMT-Kata
@@ -23,12 +26,32 @@ package com.smt.kata.math;
 public class PythagoreamTriplet {
 
 	/**
-	 * Checks to see if any of the triplets in the values array make a 
-	 * pythagoream theory equate to true
+	 * Checks to see if any of the triplets in the values array make a pythagoream
+	 * theory equate to true
+	 * 
 	 * @param values Array of numbers to evaluate
-	 * @return True if 3 values match pythagoreams thereom.  False otherwise
+	 * @return True if 3 values match pythagoreams thereom. False otherwise
 	 */
 	public boolean hasMatch(int[] values) {
-		return values == null;
+		if (values == null) return false;
+
+		ArrayList<Integer> squares = new ArrayList();
+
+		for (int i = 0; i < values.length; i++) {
+			squares.add((values[i] * values[i]));
+		}
+
+		for (int squared : squares) {
+			for (int i = 0; i < squares.size(); i++) {
+				for (int j = 0; j < squares.size(); j++) {
+					if (squares.get(i) + squares.get(j) == squared) {
+						return true;
+					}
+				}
+			}
+		}
+		System.out.println(squares);
+
+		return false;
 	}
 }

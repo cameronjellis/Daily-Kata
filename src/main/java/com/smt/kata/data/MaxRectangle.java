@@ -1,41 +1,28 @@
 package com.smt.kata.data;
 
 /****************************************************************************
- * <b>Title</b>: MaxRectangle.java
- * <b>Project</b>: SMT-Kata
- * <b>Description: </b> Max rectangle Kata
+ * <b>Title</b>: MaxRectangle.java <b>Project</b>: SMT-Kata <b>Description: </b>
+ * Max rectangle Kata
  * 
- * You are given a histogram consisting of rectangles of different heights. These 
- * heights are represented in an input list, such that [1, 3, 2, 5] corresponds 
- * to the following diagram:
+ * You are given a histogram consisting of rectangles of different heights.
+ * These heights are represented in an input list, such that [1, 3, 2, 5]
+ * corresponds to the following diagram:
  * 
- *       x
- *       x  
- *   x   x
- *   x x x
- * x x x x
+ * x x x x x x x x x x x
  * 
- * Determine the area of the largest rectangle that can be formed only from the 
- * bars of the histogram. For the diagram above, for example, this would be six, 
+ * Determine the area of the largest rectangle that can be formed only from the
+ * bars of the histogram. For the diagram above, for example, this would be six,
  * representing the 2 x 3 area at the bottom right.
  * 
- * Example Two:
- * input: [4, 4, 4, 4]
- * Results: 16
+ * Example Two: input: [4, 4, 4, 4] Results: 16
  *
- * x x x x  
- * x x x x
- * x x x x
- * x x x x
+ * x x x x x x x x x x x x x x x x
  * 
- * Constraints:
- * 	All rectangles MUST be fully populated
- * 	input must not be null
- * 	input must have at least one value
- * 	all values in the input must be >= 0
+ * Constraints: All rectangles MUST be fully populated input must not be null
+ * input must have at least one value all values in the input must be >= 0
  * 
- * <b>Copyright:</b> Copyright (c) 2022
- * <b>Company:</b> Silicon Mountain Technologies
+ * <b>Copyright:</b> Copyright (c) 2022 <b>Company:</b> Silicon Mountain
+ * Technologies
  * 
  * @author James Camire
  * @version 3.0
@@ -46,11 +33,36 @@ public class MaxRectangle {
 
 	/**
 	 * Finds the largest rectangle
+	 * 
 	 * @param vals Histogram of values to utilize
 	 * @return Max rectangle area
 	 */
 	public int find(int[] vals) {
-		return vals.length;
+
+		if (vals == null)
+			return 0;
+
+		int area = 0;
+
+		for (int i = 0; i < vals.length; i++) {
+			int tempv = 0;
+			int temph = 0;
+			int tempa = 0;
+			for (int j = 0; j < vals.length; j++) {
+				if (Math.abs(vals[i]) <= Math.abs(vals[j])) {
+					temph = temph + 1;
+					tempv = Math.abs(vals[i]);
+				} else {
+					temph = 0;
+				}
+				tempa = temph * tempv;
+				if (tempa > area) {
+					area = tempa;
+				}
+
+			}
+		}
+		return area;
 	}
 
 }

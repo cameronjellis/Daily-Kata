@@ -17,6 +17,18 @@ package com.smt.kata.math;
 public class PowerImpl {
 
 	public double calcPower(double num, int pow) {
-		return 0;
-    }
+		double powered = 1;
+
+		if (pow > 0) {
+			for (int i = 1; i < pow + 1; i++) {
+				powered = powered * num;
+			}
+		} else {
+			for (int i = -1; i > pow - 1; i--) {
+				powered = powered / num;
+			}
+		}
+
+		return powered;
+	}
 }

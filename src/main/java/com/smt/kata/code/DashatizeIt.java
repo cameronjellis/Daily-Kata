@@ -33,6 +33,39 @@ public class DashatizeIt {
 	 * @return Formatted string.  Empty string if input is empty or null
 	 */
     public String process(String input) {
-    	return input;
+    	StringBuilder s = new StringBuilder();
+    	StringBuilder n = new StringBuilder();
+    	
+    	if (input == null || input.length() < 1) return s.toString();
+    	
+    	System.out.println(s + input + " <->1");
+    	
+    	for (int i = 0; i < input.length(); i++) {
+    		char j = input.charAt(i);
+    		if (Character.isDigit(j)) {
+    			s.append(j);
+    		} 
+    	}	
+    	
+    	System.out.println(s + " <->2");
+    	
+    	for (int i = 0; i < s.length(); i++) {
+    		int num = Integer.parseInt(String.valueOf(s.charAt(i)));
+    		if ((num%2) == 0) {
+    			n.append(s.charAt(i));
+    		}
+    		if ((num%2) != 0) {
+    			if (i == 0) {
+    				n.append(s.charAt(i) + "-");
+    			} else if ((i == (s.length()-1))){
+    				n.append(s.charAt(i) + "-");
+    			} else {
+    				n.append("-" + s.charAt(i) + "-");
+    			}
+    		}
+    	}	
+    	
+    	System.out.println(n + " <->3");
+    	return n.toString();
     }
 }

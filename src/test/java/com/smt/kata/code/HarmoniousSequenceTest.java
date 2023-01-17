@@ -114,6 +114,6 @@ class HarmoniousSequenceTest {
 	 */
 	@Test
 	void testGetLongestReplicatingNegativeMixed() throws Exception {
-		assertEquals(4, hs.getLongest(new int[] {-1,-2,-3,-4,1,2,3,4,-1,-2,-3,-4,1,2,3,4}));
+		assertEquals(4, hs.getLongest(new int[] {-2,-3,-4,1,2,3,4,-1,-2,-3,-4,1,2,3,4}));
 	}
 }

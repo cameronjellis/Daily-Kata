@@ -1,5 +1,8 @@
 package com.smt.kata.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /****************************************************************************
  * <b>Title</b>: HarmoniousSequence.java
  * <b>Project</b>: SMT-Kata
@@ -47,6 +50,27 @@ public class HarmoniousSequence {
 	 * @return total items in the harmonious sequence
 	 */
 	public int getLongest(int[] sequence) {
-		return sequence.length;
+		
+		if (sequence == null || sequence.length < 2) return 0;
+		int longest = 0;		
+		
+		for (int i = 0; i < sequence.length-1; i ++) {			
+			List <Integer> list = new ArrayList<>();
+			list.add(sequence[i]);
+			
+			for (int j = i+1; j < sequence.length; j++) {				
+				if (Math.abs(sequence[j]-sequence[i]) == 1) {
+					list.add(sequence[j]);
+				}
+			}
+			
+			if (list.size() > longest) {
+				longest = list.size();
+			}
+		}
+		
+		if (longest < 2) return 0;
+		
+		return longest;
 	}
 }

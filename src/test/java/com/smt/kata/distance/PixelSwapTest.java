@@ -63,7 +63,7 @@ class PixelSwapTest {
 		assertEquals('G', swapped[1][0]);
 		assertEquals('G', swapped[1][1]);
 		assertEquals('G', swapped[1][2]);
-		assertEquals('G', swapped[2][1]);
+		assertEquals('G', swapped[2][0]);
 		assertEquals('G', swapped[2][1]);
 		assertEquals('G', swapped[2][2]);
 	}

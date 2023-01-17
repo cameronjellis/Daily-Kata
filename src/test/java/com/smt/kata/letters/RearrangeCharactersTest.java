@@ -22,7 +22,7 @@ import java.util.List;
  * @updates:
  ****************************************************************************/
 class RearrangeCharactersTest {
-	
+
 	// Members
 	private RearrangeCharacters rc = new RearrangeCharacters();
 

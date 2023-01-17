@@ -1,5 +1,12 @@
 package com.smt.kata.word;
 
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /****************************************************************************
  * <b>Title</b>: SortByFrequency.java
  * <b>Project</b>: SMT-Kata
@@ -38,11 +45,26 @@ public class SortByFrequency {
 
 	/**
 	 * Sorts the characters by the number of times it is in the word
+	 * 
 	 * @param word Word to sort the characters as lower case
 	 * @return characters sorted by the number of times they appear in the word
 	 */
 	public String sort(String word) {
-		return word;
+		if (word == null)
+			return "";
+
+		Map<String, Integer> map = new HashMap();
+		String[] wordArr = word.toLowerCase().split("");
+		StringBuilder newString = new StringBuilder();
+
+		for (String s : wordArr) {
+			map.merge(s, 1, Integer::sum);
+		}
+		System.out.println(wordArr + "-1");
+
+		return map.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.map(m -> m.getKey().toString()).collect(Collectors.joining());
+
 	}
 
 }

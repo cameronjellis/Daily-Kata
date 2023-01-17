@@ -76,7 +76,7 @@ public class RecursiveDescentParser {
 	/**
 	 * Regex Pattern for validating a given expression.
 	 */
-	public static final String EXPRESSION_PATTERN = ".*[^\\d\\s=_+\\-()*/].*";
+	public static final String EXPRESSION_PATTERN = ".*[\\d\\s=_+\\-()*/].*";
 
 	/**
 	 * Perform the Lexical Analysis of the given Expression.
@@ -86,15 +86,22 @@ public class RecursiveDescentParser {
 	 */
 	public int lex(String expression) throws ParseException {
 
-		//Validate the expression.
+		if (expression == null || expression.length() == 0) throw new ParseException(NOT_EMPTY_EXCEPTION);
 
+		//Validate the expression.
+		int total = 0;
 		try(Scanner s = scanExpression(expression)) {
 			s.useDelimiter("");
-
-			//Evaluate The Expression
+			total = evaluateExpression(s);
+			if (total != getInt(s))
+				throw new ParseException(RIGHT_UNBALANCED_EXCEPTION);
+		}
+		catch(Exception ex) {
+			System.out.print("Ex! " + ex.getMessage());
+			throw ex;
 		}
 		
-		return 0;
+		return total;
 	}
 
 	/**
@@ -116,6 +123,32 @@ public class RecursiveDescentParser {
 	 * @throws ParseException
 	 */
 	private int evaluateExpression(Scanner s) throws ParseException {
+		int total = 0;
+		
+		while (s.hasNext()) {
+			//System.out.println("Next is: " + s.next());
+			if (s.hasNext(" ")) {
+				s.next();
+				continue;
+			} else if (s.hasNext("[)]")) {
+				return total;
+			} else if (s.hasNext("[(]")) {
+				s.next();
+				total += parseNestedExpression(s);
+			}
+
+			if (s.hasNext("=")) {
+				s.next();
+				return total;
+			}
+
+			if (total == 0) {
+				total += evaluateTuple(getInt(s), getOperator(s), getInt(s));
+			} else {
+				total = evaluateTuple(total, getOperator(s), getInt(s));
+			}
+			
+		}
 		throw new ParseException(INVALID_EXPRESSION_EXCEPTION);
 	}
 
@@ -127,7 +160,15 @@ public class RecursiveDescentParser {
 	 * @throws ParseException Thrown when close paren is missing. 
 	 */
 	private int parseNestedExpression(Scanner s) throws ParseException {
-		throw new ParseException(MISSING_CLOSE_PAREN_EXCEPTION);
+		try {
+			int total = evaluateExpression(s);
+			if (!s.hasNext("[)]") ) 
+				throw new ParseException(MISSING_CLOSE_PAREN_EXCEPTION);
+			s.next();
+			return total;
+		} catch (Exception e) {
+			throw new ParseException(MISSING_CLOSE_PAREN_EXCEPTION);
+		}
 	}
 
 	/**
@@ -139,7 +180,18 @@ public class RecursiveDescentParser {
 	 * @throws ParseException Thrown when an invalid operand is encountered.
 	 */
 	private int evaluateTuple(int left, char op, int right) throws ParseException {
-		throw new ParseException(INVALID_OP_EXCEPTION);
+//		throw new ParseException(INVALID_OP_EXCEPTION);
+		
+		if(op == '+')
+			return left + right;
+		else if(op == '-')
+			return left - right;
+		else if(op == '*')
+			return left * right;
+		else if(op == '/')
+			return left / right;
+		else
+			throw new ParseException(INVALID_OP_EXCEPTION); 
 	}
 
 	/**
@@ -149,7 +201,16 @@ public class RecursiveDescentParser {
 	 * @throws ParseException Thrown when an Int is expected in scanner but not encountered.
 	 */
 	private int getInt(Scanner s) throws ParseException {
-		throw new ParseException(INVALID_INT_EXCEPTION);
+		StringBuilder integer = new StringBuilder();
+		if (s.hasNext("(\\s*)[\\d]+")) {
+			integer.append(s.next("(\\s*)[\\d]+"));
+			while (s.hasNext("[\\d]+")) {
+				integer.append(s.next("[\\d]+"));
+			}
+		} else{
+			throw new ParseException(INVALID_INT_EXCEPTION);
+		}
+		return Integer.parseInt(integer.toString());
 	}
 
 	/**
@@ -159,6 +220,10 @@ public class RecursiveDescentParser {
 	 * @throws ParseException Thrown when an Operator is missing.
 	 */
 	private char getOperator(Scanner s) throws ParseException {
-		throw new ParseException(MISSING_OP_EXCEPTION);
+		if (s.hasNext(EXPRESSION_PATTERN)) {
+			String next = s.next(EXPRESSION_PATTERN);
+			return next.charAt(0);
+		} else
+			throw new ParseException(MISSING_OP_EXCEPTION);
 	}	
 }

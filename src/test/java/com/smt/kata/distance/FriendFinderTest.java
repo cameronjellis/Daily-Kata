@@ -1,14 +1,14 @@
 package com.smt.kata.distance;
 
 // Junit 5
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 
 /****************************************************************************
- * <b>Title</b>: FriendFinderTest.java
- * <b>Project</b>: SMT-Kata
- * <b>Description: </b> Tests the Friend Finder kata class
- * <b>Copyright:</b> Copyright (c) 2021
+ * <b>Title</b>: FriendFinderTest.java <b>Project</b>: SMT-Kata <b>Description:
+ * </b> Tests the Friend Finder kata class <b>Copyright:</b> Copyright (c) 2021
  * <b>Company:</b> Silicon Mountain Technologies
  * 
  * @author James Camire
@@ -27,7 +27,7 @@ class FriendFinderTest {
 	@Test
 	void testCalculateDistance() {
 		FriendFinder ff = new FriendFinder();
-		
+
 		assertEquals(1, ff.calculateDistance("....SF..."));
 		assertEquals(9, ff.calculateDistance("S........F"));
 		assertEquals(4, ff.calculateDistance("..F...S.."));

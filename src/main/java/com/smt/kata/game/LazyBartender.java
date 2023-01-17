@@ -1,8 +1,10 @@
 package com.smt.kata.game;
 
+import java.util.ArrayList;
 // JDK 11.x
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /****************************************************************************
  * <b>Title</b>: LazyBartender.java
@@ -37,13 +39,84 @@ import java.util.Map;
  * @updates:
  ****************************************************************************/
 public class LazyBartender {
+	
+	List<List<Integer>> combos;
 
 	/**
 	 * Finds the minimum number of drinks the bartender has to memorize to satisfy all customers
 	 * @param custDrinks Map of customers and their drink preferences
 	 * @return Minimum number of drinks to memorize.
 	 */
-	public int minimumTypes(Map<Integer, List<Integer>> custDrinks) {
-		return custDrinks.size();
-	}
+    public int minimumTypes(Map<Integer, List<Integer>> custDrinks) {
+    	
+        if (custDrinks == null) return 0;
+        
+        combos = new ArrayList<>();
+        
+        List<List<Integer>> drinks = new ArrayList<>();
+        
+        for (List<Integer> list : custDrinks.values()) {
+            drinks.add(list);
+        }
+        
+        getCombos(drinks, 0, new ArrayList<>());
+        
+        int min = Integer.MAX_VALUE;
+        
+        for (List<Integer> result : combos) {
+            if (result.size() < min) {
+                min = result.size();
+            }
+        }
+        return min;
+    }
+    
+    public void getCombos(List<List<Integer>> drinks, int curIndex, List<Integer> curList) {
+        
+    	if(curIndex == drinks.size()) {
+            combos.add(curList);
+            return;
+        }
+    	
+        for (int num : drinks.get(curIndex)) {
+        	
+            List<Integer> newList = new ArrayList<>(curList);
+            
+            if (!curList.contains(num)) {
+                newList.add(num);
+            }
+            
+            getCombos(drinks, curIndex + 1, newList);
+        }
+        
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

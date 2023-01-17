@@ -1,5 +1,6 @@
 package com.smt.kata.distance;
 
+import java.util.ArrayList;
 // JDK 11.x
 import java.util.List;
 
@@ -48,7 +49,35 @@ public class IntersectingRectangles {
 	 * @return List of overlapping coordinates
 	 */
 	public List<Coord> getOverlap(Coord one, int width1,  int height1, Coord two, int width2, int height2) {
-		return null;
+		List<Coord> coords1 = new ArrayList<>();
+		List<Coord> coords2 = new ArrayList<>();
+		List<Coord> coordsCross = new ArrayList<>();
+		
+		if (one == null || two == null || width1<1 || height1<1 || width2<1 || height2<1) return coordsCross;
+		
+		for (int i = two.top; i < two.top + height2; i++) {
+			for (int j = two.left; j < two.left + width2; j++) {
+				Coord coord2 = new Coord(i, j);
+				coords2.add(coord2);
+			}
+		}
+				
+		for (int i = one.top; i < one.top + height1; i++) {
+			for (int j = one.left; j < one.left + width1; j++) {
+				Coord coord1 = new Coord(i, j);
+				coords1.add(coord1);
+			}
+		}
+
+		for (int i = 0; i < coords1.size(); i++) {
+			for (int j = 0; j < coords2.size(); j++) {
+				if (coords1.get(i).top == coords2.get(j).top && coords1.get(i).left == coords2.get(j).left) {
+					coordsCross.add(coords1.get(i));
+				}
+			}
+		}
+		
+		return coordsCross;
 	}
 }
 
@@ -76,5 +105,20 @@ class Coord {
 		this.top = top;
 		this.left = left;
 	}
+	
+//	@Override
+//	public int hashCode() {
+//		return 1; 
+//	}
+//	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Coord))
+			return false;
+		Coord c2 = (Coord) o;
+		return (c2.left == this.left && c2.top == this.top);
+
+	}
+	
 }
 

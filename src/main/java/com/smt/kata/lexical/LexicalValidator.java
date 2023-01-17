@@ -1,14 +1,16 @@
 package com.smt.kata.lexical;
 
 /**
- * Part one of a series designed to help design a lexical Analyzer, this Kata focuses on performing string validation before any analysis occurs.
+ * Part one of a series designed to help design a lexical Analyzer, this Kata 
+ * focuses on performing string validation before any analysis occurs.
  * 
  * The goal is to write a regex pattern that will validate an equation 
  * consists of a left side of numbers and operands (+ or -) 
  * with any number of spaces between them, an = symbol, 
  * and a right side consisting of a number.
  * 
- * All numbers will be positive.  No letters or other special characters should exist.
+ * All numbers will be positive.  No letters or other special characters should 
+ * exist.
  * 
  * Example of a valid equation
  * 
@@ -34,7 +36,7 @@ public class LexicalValidator {
 	 * @param equation
 	 * @return
 	 */
-	public boolean validate(String equation) {
-		return true;
-	}
+    public boolean validate(String equation) {
+    	return equation != null && equation.matches(" *[0-9]+ *[+-] *[0-9]+( *[+-]+ *[0-9]+)* *= *[0-9]+ *");
+    }
 }

@@ -47,6 +47,12 @@ public class QueenAttack {
 	public QueenAttack(char[][] chessboard) {
 		super();
 		
+		for (int i = 0; i < chessboard.length; i++) {
+			for (int j = 0; j < chessboard[i].length; j++) {
+				chessboard[i][j] = '-';
+			}
+		}
+		
 		this.chessboard = chessboard;
 	}
 
@@ -57,6 +63,10 @@ public class QueenAttack {
 	 * @return true if they can attack in any direction.  False otherwise
 	 */
 	public boolean canAttack(int[] white, int[] black) {
-		return white[0] == black[0];
+
+		if (white == null || black == null) return false;
+		if (white.length != 2 || black.length != 2) return false;
+		
+		return ((Math.abs(white[1] - black[1])) == (Math.abs(white[0] - black[0])) || white[0] == black[0] || white[1] == black[1]);
 	}
 }

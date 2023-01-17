@@ -1,5 +1,10 @@
 package com.smt.kata.code;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Given a list and a number, create a new list that contains each number of list
  * at most N times, without reordering.  For example if the input number is 2, 
@@ -21,6 +26,19 @@ package com.smt.kata.code;
 public class RemoveNOccurances {
 
 	public int [] removeOccurances(int [] data, int maxOccurances) {
-    return null;
+		if (data == null) return new int[0];
+				
+		Map<Integer, Integer> hm = new HashMap();
+		List<Integer> result = new ArrayList();
+		
+		for (int num : data) {		
+			hm.putIfAbsent(num, 0);
+			hm.put(num, hm.get(num)+1);
+			if (hm.get(num) <= maxOccurances) {
+				result.add(num);
+			}
+		}	
+		
+    return result.stream().mapToInt(i -> i).toArray();
 	}
 }

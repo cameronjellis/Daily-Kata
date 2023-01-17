@@ -1,4 +1,5 @@
 package com.smt.kata.code;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +35,8 @@ public class DiamondGeneration {
 	 * @return
 	 */
 	public List<String> generateDiamond(Character l) {
-		return null;
+		List<String> diamond = new ArrayList<>();
+		System.out.println(diamond + "1");
+		return diamond;
 	}
 }

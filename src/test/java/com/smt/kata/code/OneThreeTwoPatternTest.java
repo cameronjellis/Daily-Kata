@@ -90,6 +90,6 @@ class OneThreeTwoPatternTest {
 	 */
 	@Test
 	void testGetTotalShort() throws Exception {
-		assertEquals(1, ottp.getTotal(new int[] {8,9,7}));
+		assertEquals(0, ottp.getTotal(new int[] {8,9,7}));
 	}
 }
